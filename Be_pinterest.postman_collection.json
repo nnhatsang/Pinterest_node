@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "d02f7730-96a7-474e-a1c4-4513ab4b6139",
+		"name": "Be_pinterest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26387229",
+		"_collection_link": "https://galactic-crescent-932241.postman.co/workspace/nnhatsang~c2c75c81-adaa-454b-9470-6c3cba1718f1/collection/26387229-d02f7730-96a7-474e-a1c4-4513ab4b6139?action=share&source=collection_link&creator=26387229"
+	},
+	"item": [
+		{
+			"name": "signUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"hoten\":\"sang\",\r\n\"tuoi\":18,\r\n\"email\":\"sang@gmail.com\",\r\n\"matkhau\":\"123456\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/auth/signUp"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"sang@gmail.com\",\r\n    \"matkhau\":\"123456\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "get all image and search by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/images/get-image?key=image2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"images",
+						"get-image"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "image2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "image detail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/images/image-detail/1"
+			},
+			"response": []
+		},
+		{
+			"name": "check saved image",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjExLCJrZXkiOjE3MDM5MzM0NTMxMTZ9LCJpYXQiOjE3MDM5MzM0NTMsImV4cCI6MTcwMzkzMzQ1Nn0.jmUnaP-_YGqKEyLqtgzSvNMH9z80XBk6xTao-r_LpVs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": "{{url}}/images/check-save-image/1"
+			},
+			"response": []
+		},
+		{
+			"name": "save image",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjExLCJrZXkiOjE3MDM5MzczNzY4MTZ9LCJpYXQiOjE3MDM5MzczNzYsImV4cCI6MTcwMzkzNzM3OX0.g7V7jDs3nem_jXQtJ4i_BSONrmpaR3uz-SSoMPi6HVk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"hinh_id\":77}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/images/save-image"
+			},
+			"response": []
+		},
+		{
+			"name": "get list comment by id image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/images/comment-image/1"
+			},
+			"response": []
+		},
+		{
+			"name": "add comment image",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjExLCJrZXkiOjE3MDM5NjAyMjE5NzB9LCJpYXQiOjE3MDM5NjAyMjEsImV4cCI6MTcwMzk2MDIyNH0.22mwFvKk5heTZ-Ze-xGuMq8yQs8HU5JDoro4d6fgyz0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hinh_id\":1,\r\n    \"noi_dung\":\"thu va trai nghiem 31\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/images/add-comment"
+			},
+			"response": []
+		},
+		{
+			"name": "info user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjExLCJrZXkiOjE3MDM5NjAyMjE5NzB9LCJpYXQiOjE3MDM5NjAyMjEsImV4cCI6MTcwMzk2MDIyNH0.22mwFvKk5heTZ-Ze-xGuMq8yQs8HU5JDo0",
+						"type": "text"
+					}
+				],
+				"url": "{{url}}/user/info-user"
+			},
+			"response": []
+		},
+		{
+			"name": "list image saved by user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjExLCJrZXkiOjE3MDM5NjA5NTcwNTB9LCJpYXQiOjE3MDM5NjA5NTcsImV4cCI6MTcwNDU2NTc1N30.vzqX0TpSZdl-bQfkm8jxamGlO4KlctwOlDTFNN7M03I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/user/get-saved-images",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"get-saved-images"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjExLCJrZXkiOjE3MDM5NjA5NTcwNTB9LCJpYXQiOjE3MDM5NjA5NTcsImV4cCI6MTcwNDU2NTc1N30.vzqX0TpSZdl-bQfkm8jxamGlO4KlctwOlDTFNN7M03I",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list image create by user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjExLCJrZXkiOjE3MDM5NjA5NTcwNTB9LCJpYXQiOjE3MDM5NjA5NTcsImV4cCI6MTcwNDU2NTc1N30.vzqX0TpSZdl-bQfkm8jxamGlO4KlctwOlDTFNN7M03I",
+						"type": "text"
+					}
+				],
+				"url": "{{url}}/user/get-add-images"
+			},
+			"response": []
+		}
+	]
+}
