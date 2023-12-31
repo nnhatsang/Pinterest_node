@@ -9,3 +9,9 @@ export const config = {
   port: process.env.DB_PORT,
   dialect: process.env.DB_DIALECT,
 };
+
+// export const configCloud = {
+//   cloud_name: process.dotenv.cloud_name,
+//   api_key: process.dotenv.api_key,
+//   api_secret: process.dotenv.api_secret,
+// };

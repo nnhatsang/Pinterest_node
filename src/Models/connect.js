@@ -1,5 +1,5 @@
-import { config } from "../Configs/config.js";
 import { Sequelize } from "sequelize";
+import { config } from "../Configs/config.js";
 
 export const sequelize = new Sequelize(
   config.database,
@@ -18,3 +18,10 @@ try {
 } catch (err) {
   console.log(err);
 }
+
+// cloudinary.config({
+//   cloud_name: configCloud.cloud_name,
+//   api_key: configCloud.api_key,
+//   api_secret: config.api_secret,
+// });
+

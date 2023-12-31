@@ -5,6 +5,8 @@ import rootRoutes from "./Routes/rootRoutes.js";
 const app = express();
 
 // định dạng
+app.use(express.static("."));
+
 app.use(express.json());
 app.use(cors());
 app.listen(8080);

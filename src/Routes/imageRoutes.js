@@ -2,11 +2,10 @@ import express from "express";
 import {
   checkSavedImage,
   createComment,
-  getImageByName,
   getImageId,
   getListCommentByImage,
   getListImage,
-  saveImage,
+  saveImage
 } from "../Controllers/imageController.js";
 const imageRoute = express.Router();
 imageRoute.get("/get-image", getListImage);

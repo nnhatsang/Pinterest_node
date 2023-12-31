@@ -215,6 +215,54 @@
 				"url": "{{url}}/user/get-add-images"
 			},
 			"response": []
+		},
+		{
+			"name": "delete image (update soft delete)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjExLCJrZXkiOjE3MDQwMTAxODk5NDF9LCJpYXQiOjE3MDQwMTAxODksImV4cCI6MTcwNDAxMDE5Mn0.yQ-IWbrHQ8aSIXrAjeaOfgQ5-WnbpncymBG8lf_Ds6s",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"hinh_id\":1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/user/delete-image"
+			},
+			"response": []
+		},
+		{
+			"name": "update-info-user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjExLCJrZXkiOjE3MDQwMTI5OTYyMTh9LCJpYXQiOjE3MDQwMTI5OTYsImV4cCI6MTcwNDAxMjk5OX0.m9QL-_Dev6CUl2peNLO6aHvsJFC3wRRNi8qwX5FvQlw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hoten\": \"sangggg\",\r\n    \"matkhau\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/user/update-info-user"
+			},
+			"response": []
 		}
 	]
 }

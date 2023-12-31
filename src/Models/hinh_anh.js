@@ -29,6 +29,11 @@ export default class hinh_anh extends Model {
         model: 'nguoi_dung',
         key: 'nguoi_dung_id'
       }
+    },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: 0
     }
   }, {
     sequelize,

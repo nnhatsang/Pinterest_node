@@ -15,6 +15,7 @@ export const getListImage = async (req, res) => {
           ten_hinh: {
             [Op.like]: `%${key}%`,
           },
+          is_deleted: false,
         },
       });
 
@@ -25,7 +26,7 @@ export const getListImage = async (req, res) => {
       responseData(res, data, "Thành công", 200);
     } else {
       // Nếu không có key, trả về tất cả hình ảnh
-      let data = await model.hinh_anh.findAll();
+      let data = await model.hinh_anh.findAll({ where: { is_deleted: false } });
       responseData(res, "Thành công", data, 200);
     }
   } catch {
@@ -33,40 +34,40 @@ export const getListImage = async (req, res) => {
   }
 };
 
-export const getImageByName = async (req, res) => {
-  try {
-    //   const { ten_hinh } = req.params;
-    const { key } = req.query;
-    if (!key) {
-      responseData(res, "Tên hình không được trống", "", 400);
-      return;
-    }
+// export const getImageByName = async (req, res) => {
+//   try {
+//     //   const { ten_hinh } = req.params;
+//     const { key } = req.query;
+//     if (!key) {
+//       responseData(res, "Tên hình không được trống", "", 400);
+//       return;
+//     }
 
-    let data = await model.hinh_anh.findAll({
-      where: {
-        ten_hinh: {
-          [Op.like]: `%${key}%`,
-        },
-      },
-    });
+//     let data = await model.hinh_anh.findAll({
+//       where: {
+//         ten_hinh: {
+//           [Op.like]: `%${key}%`,
+//         },
+//       },
+//     });
 
-    if (!data || data.length === 0) {
-      // Nếu không tìm thấy hình, trả về mã lỗi 404 - Not Found
-      responseData(res, "Không tìm thấy hình với tên đã cho", "", 404);
-      return;
-    }
+//     if (!data || data.length === 0) {
+//       // Nếu không tìm thấy hình, trả về mã lỗi 404 - Not Found
+//       responseData(res, "Không tìm thấy hình với tên đã cho", "", 404);
+//       return;
+//     }
 
-    responseData(res, "Thành công", data, 200);
-  } catch {
-    responseData(res, "Lỗi ...", "", 500);
-  }
-};
+//     responseData(res, "Thành công", data, 200);
+//   } catch {
+//     responseData(res, "Lỗi ...", "", 500);
+//   }
+// };
 
 export const getImageId = async (req, res) => {
   try {
     let { hinh_id } = req.params;
     let data = await model.hinh_anh.findOne({
-      where: { hinh_id },
+      where: { hinh_id, is_deleted: false },
       include: [
         {
           model: model.nguoi_dung,
@@ -75,6 +76,9 @@ export const getImageId = async (req, res) => {
         },
       ],
     });
+    if (!data || data.length === 0)
+      return responseData(res, "Không tìm thấy hình với tên đã cho", "", 404);
+
     responseData(res, "Thành công", data, 200);
   } catch {
     responseData(res, "Lỗi ...", "", 500);
