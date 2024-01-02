@@ -6,11 +6,7 @@ import initModels from "../Models/init-models.js";
 
 import cloudinary from "cloudinary";
 
-cloudinary.config({
-  cloud_name: "debpu6bvf",
-  api_key: "917416417964682",
-  api_secret: "fQU8qnEQ5kUSH1sjV64ZsA9Esk4",
-});
+
 
 let model = initModels(sequelize);
 
@@ -126,33 +122,59 @@ export const updateInfo = async (req, res) => {
   }
 };
 
+import multer from "multer";
+let storage = multer.diskStorage({
+  destination: "",
+  filename: "",
+});
+import fs from "fs";
+import compress_images from "compress-images";
+
 export const createImage = async (req, res) => {
-  //  try {
-    const { token } = req.headers;
-    const accessToken = decodeToken(token);
-    const { nguoi_dung_id } = accessToken.data;
-
-    const imageFile = req.file; // Assuming you are using multer middleware for file upload
-    if (!imageFile) {
-      return responseData(res, "Image not found in the request", "", 400);
+  // try {
+  let { file } = req;
+  // tối ưu hình ảnh , > 500KB
+  compress_images(
+    process.cwd() + "/public/imgs/" + file.filename,
+    process.cwd() + "/public/video/",
+    { compress_force: false, statistic: true, autoupdate: true },
+    false,
+    { jpg: { engine: "mozjpeg", command: ["-quality", "10"] } },
+    { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+    { svg: { engine: "svgo", command: "--multipass" } },
+    {
+      gif: {
+        engine: "gifsicle",
+        command: ["--colors", "64", "--use-col=web"],
+      },
+    },
+    function (error, completed, statistic) {
+      // xóa tấm hình chưa tối ưu
     }
-
-    const cloudinaryResult = await cloudinary.uploader.upload(imageFile.buffer.toString('base64'));
-    
-    const newImage = await model.hinh_anh.create({
-      ten_hinh: req.body.ten_hinh,
-      duong_dan: cloudinaryResult.secure_url,
-      mo_ta: req.body.mo_ta,
+  );
+  let { token } = req.headers;
+  let accessToken = decodeToken(token);
+  let { nguoi_dung_id } = accessToken.data;
+  let existingImage = await model.hinh_anh.findOne({
+    where: {
       nguoi_dung_id: nguoi_dung_id,
-    });
+    },
+  });
 
-    await model.luu_anh.create({
+  if (existingImage) {
+    // Nếu người dùng đã có hình ảnh, cập nhật đường dẫn mới
+    existingImage.duong_dan = file.filename;
+    await existingImage.save();
+  } else {
+    // Nếu người dùng chưa có hình ảnh, tạo mới
+    await model.hinh_anh.create({
+      duong_dan: file.filename,
       nguoi_dung_id: nguoi_dung_id,
-      hinh_id: newImage.hinh_id,
-      ngay_luu: new Date(),
+      is_deleted: false,
     });
+  }
 
-    responseData(res, "Create image success", newImage, 201);
+  res.send(file.filename);
   // } catch {
   //   responseData(res, "Lỗi ...", "", 500);
   // }
