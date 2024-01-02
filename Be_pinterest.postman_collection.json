@@ -263,6 +263,31 @@
 				"url": "{{url}}/user/update-info-user"
 			},
 			"response": []
+		},
+		{
+			"name": "upload-image",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5ndW9pX2R1bmdfaWQiOjExLCJrZXkiOjE3MDQwMjc5OTg1ODl9LCJpYXQiOjE3MDQwMjc5OTgsImV4cCI6MTcwNDAyODAwMX0.gLrI8YY7ISv2QtM9PAeor7ZkT6XdeJuZ2bNkRHPSVKU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/H:/pexels-photo-1485894.jpeg"
+						}
+					]
+				},
+				"url": "{{url}}/user/upload-image"
+			},
+			"response": []
 		}
 	]
 }
